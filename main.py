@@ -1,8 +1,8 @@
-import platform
+import distro
 import subprocess
 
 # Get the distribution name
-distname = platform.linux_distribution()[0].lower()
+distname = distro.id()
 
 # Set the name of the Google Chrome binary based on the distribution
 if distname == "ubuntu" or distname == "debian":
