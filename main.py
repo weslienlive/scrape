@@ -6,6 +6,7 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 from bs4 import BeautifulSoup
+from tqdm import tqdm
 
 options = Options()
 options.add_argument('--headless')
@@ -34,7 +35,7 @@ try:
     rows = calendar_table.find_all('tr')
 
     # Loop through the rows and get the ones that meet the criteria
-    for row in rows:
+    for row in tqdm(rows, desc="looping through ther rows"):
         cells = row.find_all("td")
         if any("US" in cell.text for cell in cells) and any("calendar__cell calendar__impact impact calendar__impact calendar__impact--low" in cell["class"] for cell in cells):
             # Get text from <span> inside <td> with class="calendar__cell"
