@@ -39,6 +39,8 @@ try:
         td_tags = tr.find_all('td')
         for td in td_tags:
             if td.text.strip() == 'US' and 'calendar__cell calendar__impact impact calendar__impact calendar__impact--low' in td['class']:
+                print(tr)
+                '''
                 # Get text from <span> inside <td> with class="calendar__cell"
                 event_date = tr.find("td", {"class": "calendar__cell"}).find("span").text
                 
@@ -52,7 +54,7 @@ try:
                 print("Event Date:", event_date)
                 print("Event Time:", event_time)
                 print("Event Name:", event_name)
-
+                '''
                 break
 
 
