@@ -37,8 +37,10 @@ try:
     # Loop through the tr tags and only print the ones that meet the criteria
     for tr in tqdm(tr_tags, desc="Processing events"):
         td_tags = tr.find_all('td')
+        print(td_tags)
+
         for td in td_tags:
-            if td.text.strip() == 'US' and 'calendar__cell calendar__impact impact calendar__impact calendar__impact--low' in td['class']:
+            if td.text.strip() == 'US':
                 print(tr)
                 '''
                 # Get text from <span> inside <td> with class="calendar__cell"
