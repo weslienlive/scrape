@@ -21,21 +21,25 @@ driver.get(url)
 
 try:
     # Wait for the tbody tag to appear on the webpage
-    table_locator = (By.CSS_SELECTOR, 'table.calendar__table  ')
-    WebDriverWait(driver, 10).until(EC.presence_of_element_located(table_locator))
+    tbody_locator = (By.TAG_NAME, 'tbody')
+    WebDriverWait(driver, 15).until(EC.presence_of_element_located(tbody_locator))
 
     # Get the page source and parse it with BeautifulSoup
     soup = BeautifulSoup(driver.page_source, 'html.parser')
 
     # Find the table with class "calendar__table"
     calendar_table = soup.find('table', {'class': 'calendar__table  '})
+    print(bool(calendar_table))
 
     # Find all the tr tags in the table
-    tr_tags = calendar_table.find_all('tr')
+    tr_tags = table.find_all('tr')
+    print(bool(tr_tags))
+    print(len(tr_tags))
 
     # Loop through the tr tags and only print the ones that meet the criteria
     for tr in tr_tags:
         td_tags = tr.find_all('td')
+        print(bool(td_tags))
         for td in td_tags:
             if td.text.strip() == 'US' and 'calendar__cell calendar__impact impact calendar__impact calendar__impact--low' in td['class']:
                 # Get text from <span> inside <td> with class="calendar__cell"
