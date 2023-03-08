@@ -6,7 +6,6 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 from bs4 import BeautifulSoup
-from tqdm import tqdm
 
 options = Options()
 options.add_argument('--headless')
@@ -32,26 +31,18 @@ try:
     calendar_table = soup.find('table', {'class': 'calendar__table'})
 
     # Find all the tr tags in the table
-    rows = calendar_table.find_all('tr')
+    tr_tags = table.find_all('tr')
 
-    # Loop through the rows and get the ones that meet the criteria
-    for row in tqdm(rows, desc="looping through ther rows"):
-        cells = row.find_all("td")
-        if any("US" in cell.text for cell in cells) and any("calendar__cell calendar__impact impact calendar__impact calendar__impact--low" in cell["class"] for cell in cells):
-            # Get text from <span> inside <td> with class="calendar__cell"
-            event_date = row.find("td", {"class": "calendar__cell"}).find("span").text
-            
-            # Get text from <td> with class="calendar__cell calendar__time time"
-            event_time = row.find("td", {"class": "calendar__cell calendar__time time"}).text
-            
-            # Get text from <span> with class="calendar__event-title"
-            event_name = row.find("span", {"class": "calendar__event-title"}).text
-            
-            # Print the variables
-            print("Event Date:", event_date)
-            print("Event Time:", event_time)
-            print("Event Name:", event_name)
+    # Loop through the tr tags and only print the ones that meet the criteria
+    for tr in tr_tags:
+        td_tags = tr.find_all('td')
+        for td in td_tags:
+            if td.text.strip() == 'US' and 'calendar__cell calendar__impact impact calendar__impact calendar__impact--low' in td['class']:
+                print(tr)
+                break
+    
 
+    #print(tbody)
 except Exception as e:
     print(f"Error: {e}")
     print("Could not find the tbody tag on the webpage.")
