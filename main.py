@@ -25,7 +25,6 @@ try:
     # Find the tbody tag and print it
     tbody = soup.find('tbody')
     print(tbody)
-    break
 except Exception as e:
     print(f"Error: {e}")
     print("Could not find the tbody tag on the webpage.")
