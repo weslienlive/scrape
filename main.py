@@ -25,7 +25,7 @@ try:
     WebDriverWait(driver, 15).until(EC.presence_of_element_located(tbody_locator))
 
     # Get the page source and parse it with BeautifulSoup
-    soup = BeautifulSoup(driver.page_source, 'html5lib')
+    soup = BeautifulSoup(driver.page_source, 'html.parser')
 
     # Find the tbody tag and print it
     tbody = soup.find('tbody')
