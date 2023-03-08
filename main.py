@@ -16,7 +16,7 @@ driver = webdriver.Chrome(service=Service(executable_path=chrome_driver_path), o
 driver.implicitly_wait(60)
 url = "https://www.forexfactory.com/calendar"
 print(url)
-driver.get(url, timeout=60)
+driver.get(url)
 
 
 
