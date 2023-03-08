@@ -32,8 +32,7 @@ try:
     calendar_table = soup.find('table', {'class': 'calendar__table'})
 
     # Find all the <tr> tags that have class "calendar__cell calendar__impact impact calendar__impact calendar__impact--high"
-    tr_tags = calendar_table.select('tr.calendar__row.calendar_row.calendar__row--grey.calendar__row--new-day.newday td.calendar__cell.calendar__impact.impact.calendar__impact.calendar__impact--high')
-
+    tr_tags = calendar_table.find_all('tr')
     print(tr_tags)
 
 except Exception as e:
