@@ -31,7 +31,7 @@ try:
     calendar_table = soup.find('table', {'class': 'calendar__table  '})
 
     # Find all the tr tags in the table
-    tr_tags = table.find_all('tr')
+    tr_tags = calendar_table.find_all('tr')
 
     # Loop through the tr tags and only print the ones that meet the criteria
     for tr in tr_tags:
