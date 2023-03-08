@@ -33,7 +33,13 @@ try:
 
     # Find all the <tr> tags that have class "calendar__cell calendar__impact impact calendar__impact calendar__impact--high"
     tr_tags = calendar_table.find_all('tr')
-    print(tr_tags)
+    
+    # Find all <tr> tags with the specified class using BeautifulSoup's "select" method
+    tags = tr_tags.select('tr.calendar__row.calendar__expand.calendar__row--alt > td.calendar__cell.calendar__impact.impact.calendar__impact.calendar__impact--high')
+
+# Print the desired information from the <tr> tags
+for tr in tags:
+    print(tr.text)
 
 except Exception as e:
     print(f"Error: {e}")
