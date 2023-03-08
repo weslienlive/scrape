@@ -32,7 +32,7 @@ try:
     print(bool(calendar_table))
 
     # Find all the tr tags in the table
-    tr_tags = table.find_all('tr')
+    tr_tags = calendar_table.find_all('tr')
     print(bool(tr_tags))
     print(len(tr_tags))
 
