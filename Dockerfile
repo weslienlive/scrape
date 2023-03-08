@@ -7,6 +7,7 @@ RUN echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >
 RUN apt-get update && apt-get install -y google-chrome-stable
 RUN google-chrome --version
 
+COPY chromedriver /usr/bin/chromedriver
 COPY requirements.txt /app/requirements.txt
 RUN pip install -r requirements.txt
 COPY . /app
