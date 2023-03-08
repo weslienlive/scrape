@@ -39,25 +39,21 @@ try:
         td_tags = tr.find_all('td', {'class': 'calendar__cell calendar__currency currency'})
         for td in td_tags:
             print(td)
-                '''
-                # Get text from <span> inside <td> with class="calendar__cell"
-                event_date = tr.find("td", {"class": "calendar__cell"}).find("span").text
-                
-                # Get text from <td> with class="calendar__cell calendar__time time"
-                event_time = tr.find("td", {"class": "calendar__cell calendar__time time"}).text
-                
-                # Get text from <span> with class="calendar__event-title"
-                event_name = tr.find("span", {"class": "calendar__event-title"}).text
-                
-                # Print the variables
-                print("Event Date:", event_date)
-                print("Event Time:", event_time)
-                print("Event Name:", event_name)
-                '''
-                break
+'''
+# Get text from <span> inside <td> with class="calendar__cell"
+event_date = tr.find("td", {"class": "calendar__cell"}).find("span").text
 
+# Get text from <td> with class="calendar__cell calendar__time time"
+event_time = tr.find("td", {"class": "calendar__cell calendar__time time"}).text
 
-    #print(tbody)
+# Get text from <span> with class="calendar__event-title"
+event_name = tr.find("span", {"class": "calendar__event-title"}).text
+
+# Print the variables
+print("Event Date:", event_date)
+print("Event Time:", event_time)
+print("Event Name:", event_name)
+'''
 except Exception as e:
     print(f"Error: {e}")
     print("Could not find the tbody tag on the webpage.")
