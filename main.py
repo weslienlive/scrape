@@ -8,7 +8,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from bs4 import BeautifulSoup
 
 options = Options()
-options.add_argument('headless')
+options.add_argument('--headless')
 options.add_argument('--no-sandbox')
 options.add_argument('--disable-dev-shm-usage')
 options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36")
@@ -22,14 +22,35 @@ driver.get(url)
 try:
     # Wait for the tbody tag to appear on the webpage
     tbody_locator = (By.TAG_NAME, 'tbody')
-    WebDriverWait(driver, 15).until(EC.presence_of_element_located(tbody_locator))
+    WebDriverWait(driver, 5).until(EC.presence_of_element_located(tbody_locator))
 
     # Get the page source and parse it with BeautifulSoup
     soup = BeautifulSoup(driver.page_source, 'html.parser')
 
-    # Find the tbody tag and print it
-    tbody = soup.find('tbody')
-    print(tbody)
+    # Find the table with class "calendar__table"
+    calendar_table = soup.find('table', {'class': 'calendar__table'})
+
+    # Find all the tr tags in the table
+    rows = calendar_table.find_all('tr')
+
+    # Loop through the rows and get the ones that meet the criteria
+    for row in rows:
+        cells = row.find_all("td")
+        if any("US" in cell.text for cell in cells) and any("calendar__cell calendar__impact impact calendar__impact calendar__impact--low" in cell["class"] for cell in cells):
+            # Get text from <span> inside <td> with class="calendar__cell"
+            event_date = row.find("td", {"class": "calendar__cell"}).find("span").text
+            
+            # Get text from <td> with class="calendar__cell calendar__time time"
+            event_time = row.find("td", {"class": "calendar__cell calendar__time time"}).text
+            
+            # Get text from <span> with class="calendar__event-title"
+            event_name = row.find("span", {"class": "calendar__event-title"}).text
+            
+            # Print the variables
+            print("Event Date:", event_date)
+            print("Event Time:", event_time)
+            print("Event Name:", event_name)
+
 except Exception as e:
     print(f"Error: {e}")
     print("Could not find the tbody tag on the webpage.")
