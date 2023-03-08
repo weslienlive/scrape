@@ -21,14 +21,14 @@ driver.get(url)
 
 try:
     # Wait for the tbody tag to appear on the webpage
-    tbody_locator = (By.TAG_NAME, 'tbody')
-    WebDriverWait(driver, 10).until(EC.presence_of_element_located(tbody_locator))
+    table_locator = (By.CSS_SELECTOR, 'table.calendar__table  ')
+    WebDriverWait(driver, 10).until(EC.presence_of_element_located(table_locator))
 
     # Get the page source and parse it with BeautifulSoup
     soup = BeautifulSoup(driver.page_source, 'html.parser')
 
     # Find the table with class "calendar__table"
-    calendar_table = soup.find('table', {'class': 'calendar__table'})
+    calendar_table = soup.find('table', {'class': 'calendar__table  '})
 
     # Find all the tr tags in the table
     tr_tags = table.find_all('tr')
