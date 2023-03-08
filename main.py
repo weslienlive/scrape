@@ -14,7 +14,10 @@ options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) Apple
 chrome_driver_path = "/usr/local/bin/chromedriver" 
 driver = webdriver.Chrome(service=Service(executable_path=chrome_driver_path), options=options)
 url = "https://www.forexfactory.com/calendar"
-driver.get(url)
+print(url)
+driver.get(url, timeout=60)
+
+
 
 try:
     # Wait for the tbody tag to appear on the webpage
