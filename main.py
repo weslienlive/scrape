@@ -31,15 +31,35 @@ try:
     # Find the table with class "calendar__table"
     calendar_table = soup.find('table', {'class': 'calendar__table'})
 
-    # Find all the tr tags in the table
-    tr_tags = calendar_table.find_all('tr')
+    # Find the <tr> tags that have class "calendar__cell calendar__impact impact calendar__impact calendar__impact--high"
+    tr_tags = calendar_table.select('tr.calendar__row.calendar_row.calendar__row--grey.calendar__row--new-day.newday td.calendar__cell.calendar__impact.impact.calendar__impact.calendar__impact--high')
 
-    # Loop through the tr tags and only print the ones that meet the criteria
-    for tr in tqdm(tr_tags, desc="Processing events"):
-        td_tags = tr.find_all('td', {'class': 'calendar__cell calendar__currency currency'})
-        for td in td_tags:
-            print(td)
+    # Extract the desired information from the first <tr> tag
+    event_date = tr_tags[0].find('td', {'class': 'calendar__cell calendar__date date'}).text.strip()
+    event_time = tr_tags[0].find('td', {'class': 'calendar__cell calendar__time time'}).text.strip()
+    event_name = tr_tags[0].find('td', {'class': 'calendar__cell calendar__event event'}).span.text.strip()
+
+    # Print the results
+    print("Date:", event_date)
+    print("Time:", event_time)
+    print("Event:", event_name)
+
+
+
+except Exception as e:
+    print(f"Error: {e}")
+    print("Could not find the tbody tag on the webpage.")
+
+driver.quit()
+
+
 '''
+# Loop through the tr tags and only print the ones that meet the criteria
+for tr in tqdm(tr_tags, desc="Processing events"):
+    td_tags = tr.find_all('td', {'class': 'calendar__cell calendar__currency currency'})
+    for td in td_tags:
+        print(td)
+
 # Get text from <span> inside <td> with class="calendar__cell"
 event_date = tr.find("td", {"class": "calendar__cell"}).find("span").text
 
@@ -53,18 +73,6 @@ event_name = tr.find("span", {"class": "calendar__event-title"}).text
 print("Event Date:", event_date)
 print("Event Time:", event_time)
 print("Event Name:", event_name)
-'''
-except Exception as e:
-    print(f"Error: {e}")
-    print("Could not find the tbody tag on the webpage.")
 
-driver.quit()
-
-
-'''
-
-
-
-    
     
 '''
