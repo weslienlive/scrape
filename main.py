@@ -31,6 +31,11 @@ try:
     calendar_table = soup.find('table', {'class': 'calendar__table'})
     print(bool(calendar_table))
 
+    # Find all the tr tags in the table
+    tr_tags = calendar_table.find_all('tr')
+    print(bool(tr_tags))
+    print(len(tr_tags))
+
 
     #print(tbody)
 except Exception as e:
@@ -42,10 +47,7 @@ driver.quit()
 
 '''
 
-    # Find all the tr tags in the table
-    tr_tags = calendar_table.find_all('tr')
-    print(bool(tr_tags))
-    print(len(tr_tags))
+
 
     # Loop through the tr tags and only print the ones that meet the criteria
     for tr in tr_tags:
