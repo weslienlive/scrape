@@ -31,15 +31,28 @@ try:
     # Find the table with class "calendar__table"
     calendar_table = soup.find('table', {'class': 'calendar__table'})
 
-    # Find all the <tr> tags that have class "calendar__cell calendar__impact impact calendar__impact calendar__impact--high"
-    tr_tags = calendar_table.find_all('tr')
-    
-    # Find all <tr> tags with the specified class using BeautifulSoup's "select" method
-    tags = tr_tags.select('tr.calendar__row.calendar__expand.calendar__row--alt > td.calendar__cell.calendar__impact.impact.calendar__impact.calendar__impact--high')
+    # Find all <tr> tags with the specified class using BeautifulSoup's "find_all" method
+    tr_tags = calendar_table.find_all("tr")
 
-    # Print the desired information from the <tr> tags
-    for tr in tags:
-        print(tr.text)
+    # Loop over all tr tags in the table
+    for tr in tr_tags:
+        # Find the td tags within the tr tag
+        td_tags = tr.find_all('td')
+        
+        # Extract the event date from the first td tag
+        event_date = td_tags[0].text.strip()
+        
+        # Extract the event time from the second td tag
+        event_time = td_tags[1].text.strip()
+        
+        # Extract the event name from the fifth td tag
+        event_name = td_tags[4].text.strip()
+        
+        # Print the extracted information
+        print('Event date:', event_date)
+        print('Event time:', event_time)
+        print('Event name:', event_name)
+
 
 except Exception as e:
     print(f"Error: {e}")
