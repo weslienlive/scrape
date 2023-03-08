@@ -13,7 +13,6 @@ options.add_argument('headless')
 options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36")
 chrome_driver_path = "/usr/local/bin/chromedriver" 
 driver = webdriver.Chrome(service=Service(executable_path=chrome_driver_path), options=options)
-driver.implicitly_wait(60)
 url = "https://www.forexfactory.com/calendar"
 driver.get(url)
 
