@@ -28,8 +28,19 @@ try:
     soup = BeautifulSoup(driver.page_source, 'html.parser')
 
     # Find the table with class "calendar__table"
-    calendar_table = soup.find('table', {'class': 'calendar__table  '})
+    calendar_table = soup.find('table', {'class': 'calendar__table'})
     print(bool(calendar_table))
+
+
+    #print(tbody)
+except Exception as e:
+    print(f"Error: {e}")
+    print("Could not find the tbody tag on the webpage.")
+
+driver.quit()
+
+
+'''
 
     # Find all the tr tags in the table
     tr_tags = calendar_table.find_all('tr')
@@ -58,10 +69,4 @@ try:
 
                 break
     
-
-    #print(tbody)
-except Exception as e:
-    print(f"Error: {e}")
-    print("Could not find the tbody tag on the webpage.")
-
-driver.quit()
+'''
