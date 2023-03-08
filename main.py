@@ -22,7 +22,7 @@ driver.get(url)
 try:
     # Wait for the tbody tag to appear on the webpage
     tbody_locator = (By.TAG_NAME, 'tbody')
-    WebDriverWait(driver, 5).until(EC.presence_of_element_located(tbody_locator))
+    WebDriverWait(driver, 10).until(EC.presence_of_element_located(tbody_locator))
 
     # Get the page source and parse it with BeautifulSoup
     soup = BeautifulSoup(driver.page_source, 'html.parser')
@@ -38,7 +38,20 @@ try:
         td_tags = tr.find_all('td')
         for td in td_tags:
             if td.text.strip() == 'US' and 'calendar__cell calendar__impact impact calendar__impact calendar__impact--low' in td['class']:
-                print(tr)
+                # Get text from <span> inside <td> with class="calendar__cell"
+                event_date = tr.find("td", {"class": "calendar__cell"}).find("span").text
+                
+                # Get text from <td> with class="calendar__cell calendar__time time"
+                event_time = tr.find("td", {"class": "calendar__cell calendar__time time"}).text
+                
+                # Get text from <span> with class="calendar__event-title"
+                event_name = tr.find("span", {"class": "calendar__event-title"}).text
+                
+                # Print the variables
+                print("Event Date:", event_date)
+                print("Event Time:", event_time)
+                print("Event Name:", event_name)
+
                 break
     
 
