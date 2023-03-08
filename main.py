@@ -36,7 +36,7 @@ try:
 
     # Loop through the tr tags and only print the ones that meet the criteria
     for tr in tqdm(tr_tags, desc="Processing events"):
-        td_tags = tr.find_all('td')
+        td_tags = tr.find_all('td', {'class': 'calendar__cell calendar__currency currency'})
         for td in td_tags:
                 print(td)
                 '''
