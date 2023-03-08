@@ -38,8 +38,7 @@ try:
     for tr in tqdm(tr_tags, desc="Processing events"):
         td_tags = tr.find_all('td', {'class': 'calendar__cell calendar__currency currency'})
         for td in td_tags:
-            if td.text == 'US':
-                print(tr)
+            print(td)
                 '''
                 # Get text from <span> inside <td> with class="calendar__cell"
                 event_date = tr.find("td", {"class": "calendar__cell"}).find("span").text
