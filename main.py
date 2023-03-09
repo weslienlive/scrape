@@ -32,7 +32,7 @@ try:
     calendar_table = soup.find('table', {'class': 'calendar__table'})
 
     # Find all entries
-    entries = calendar_table.find_all('tr')
+    entries = calendar_table.find_all('tr', {'class' : 'calendar__row calendar_row calendar__row--grey calendar__row--new-day newday'})
 
     # Loop over entries and print their index number and contents
     events_schedule = {}
