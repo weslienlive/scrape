@@ -52,6 +52,10 @@ try:
         time = entry.find_all("td", {"class" : "calendar__cell calendar__time time"})
         entry_data["time"] = ', '.join([t.text.strip() for t in time])
 
+        # get name
+        name = entry.find("span", {"class" : "calendar__event-title"})
+        entry_data["name"] = name.text.strip()       
+
 
 
         # Update events schedule
