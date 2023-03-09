@@ -38,6 +38,12 @@ try:
     entries = calendar_table.find_all('tr')
     print(entries)
 
+    # Loop over entries and print their index number and contents
+    events_schedule = {}
+    for i, entry in enumerate(entries):
+        events_schedule[f"entry_{i+1}"] = entry
+        
+
 except Exception as e:
     print(f"Error: {e}")
     print("Could not find the tbody tag on the webpage.")
