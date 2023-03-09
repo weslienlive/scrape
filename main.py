@@ -44,6 +44,11 @@ try:
         currencies = entry.find_all("td", {'class' : 'calendar__cell calendar__currency currency'})
         entry_data["currency"] = ', '.join([c.text.strip() for c in currencies])
 
+        # get dates
+        dates = entry.find_all("td", {"class" : "calendar__cell calendar__date date"})
+        entry_data["date"] = ["".join([s.text.strip() for s in d.find_all("span")]) for d in dates]
+
+
         # Update events schedule
         events_schedule[f"entry_{i+1}"] = entry_data
 
