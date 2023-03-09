@@ -37,19 +37,19 @@ try:
     # Loop over all tr tags in the table
     for tr in tr_tags:
         # get event date
-        event_date = tr.find('span', {'class': 'date'}).text.strip()
+        event_date = tr.find('span', {'class': 'date'})
 
         # get event time
-        event_time = tr.find('td', {'class': 'calendar__cell calendar__time time'}).div.text.strip()
+        event_time = tr.find('td', {'class': 'calendar__cell calendar__time time'}).div.text
 
         # get event currency
-        event_currency = tr.find('td', {'class': 'calendar__cell calendar__currency currency'}).text.strip()
+        event_currency = tr.find('td', {'class': 'calendar__cell calendar__currency currency'}).text
 
         # get event impact
         event_impact = tr.find('td', {'class': 'calendar__cell calendar__impact impact calendar__impact calendar__impact--high'}).span['title']
 
         # get event title
-        event_title = tr.find('span', {'class': 'calendar__event-title'}).text.strip()
+        event_title = tr.find('span', {'class': 'calendar__event-title'}).text
 
         # print results
         print(event_date, event_time, event_currency, event_impact, event_title)
