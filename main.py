@@ -37,15 +37,15 @@ try:
     # Loop over entries and print their index number and contents
     events_schedule = {}
     for i, entry in enumerate(entries):
-        entries = { "currency" : None, "date" : None, "time" : None, "name" : None, "impact" : None}\
+        entry_data = { "currency" : None, "date" : None, "time" : None, "name" : None, "impact" : None}
 
         # get currencies
-        currencies = entry.find_all("td", {'class' : 'calendar__cell calendar__currency currency'}).text.strip()
-        entries["currency"] = currencies
+        currencies = entry.find_all("td", {'class' : 'calendar__cell calendar__currency currency'})
+        entry_data["currency"] = [c.text for c in currencies]  # Get the text content of each currency element
 
         # Update events schedule
-        events_schedule[f"entry_{i+1}"] = entries
-        
+        events_schedule[f"entry_{i+1}"] = entry_data
+
     print(events_schedule)
 
 except Exception as e:
