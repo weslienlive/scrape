@@ -42,7 +42,8 @@ try:
 
    # Loop over all td tags with the specified class
     for i, td in enumerate(event_time):
-        symbols[f"event_time_{i+1}"] = td
+        schedule = td.find('div')
+        symbols[f"event_time_{i+1}"] = schedule.text.strip()
 
 
     # Loop over all td tags with the specified class
