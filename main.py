@@ -39,7 +39,8 @@ try:
 
     # Loop over all td tags with the specified class
     for i, td in enumerate(currencies):
-        symbols[f"symbol_{i+1}"] = td.text.strip()
+        if td.text.strip() == "USD":
+            symbols[f"symbol_{i+1}"] = td.text.strip()
 
     # Print the symbols dictionary
     print(symbols)
