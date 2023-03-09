@@ -41,7 +41,7 @@ try:
 
         # get currencies
         currencies = entry.find_all("td", {'class' : 'calendar__cell calendar__currency currency'})
-        entry_data["currency"] = [c.text for c in currencies]  # Get the text content of each currency element
+        entry_data["currency"] = [c.text.strip() for c in currencies]  # Get the text content of each currency element
 
 
         # Update events schedule
