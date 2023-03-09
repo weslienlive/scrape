@@ -36,7 +36,7 @@ try:
 
     # Loop over all td tags with the specified class
     for td in currencies:
-        if td.text.strip() == "US":
+        if td.text.strip() == "USD":
             print(td.text.strip())
 
 
