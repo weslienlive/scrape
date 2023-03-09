@@ -32,12 +32,12 @@ try:
     calendar_table = soup.find('table', {'class': 'calendar__table'})
 
     # Find all <tr> tags with the specified class using BeautifulSoup's "find_all" method
-    tr_tags = calendar_table.find_all("tr")
+    tr_tags = calendar_table.find_all("tr", {'class' : 'calendar__row calendar_row calendar__row--grey calendar__row--alt alt'})
 
     # Loop over all tr tags in the table
     for tr in tr_tags:
         # get event date
-        event_date = tr.find('span', {'class': 'date'})
+        event_date = tr.find('td', 'class' : 'calendar__cell calendar__date date').find('span', {'class': 'date'})
 
         # get event time
         event_time = tr.find('td', {'class': 'calendar__cell calendar__time time'})
