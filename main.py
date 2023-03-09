@@ -34,15 +34,15 @@ try:
     # Find all <td> tags with the specified class using BeautifulSoup's "find_all" method
     currencies = calendar_table.find_all("td", {'class' : 'calendar__cell calendar__currency currency'})
 
-    events = {}
+    # Create an empty dictionary to store the currency symbols
+    symbols = {}
 
     # Loop over all td tags with the specified class
-    for td in currencies:
-        if td.text.strip() == "USD":
-            events['market'] = td.text.strip()
+    for i, td in enumerate(currencies):
+        symbols[f"symbol_{i+1}"] = td.text.strip()
 
-    print(events)
-
+    # Print the symbols dictionary
+    print(symbols)
 
 
 
