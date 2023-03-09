@@ -39,7 +39,7 @@ try:
         td_tags = tr.find_all('td')
         for td in td_tags:
             # Get currency
-            market = td.find('td', {'class' : 'calendar__cell calendar__currency currency'})
+            market = td.find('td', class_='calendar__cell calendar__currency currency').text
 
             # Print the variables
             print("Market:", market)
