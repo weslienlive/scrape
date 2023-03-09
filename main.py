@@ -38,19 +38,11 @@ try:
     for tr in tr_tags:
         td_tags = tr.find_all('td')
         for td in td_tags:
-            # Get text from <span> inside <td> with class="calendar__cell"
-            event_date = td.find("td", {"class": "calendar__cell"}).find("span").text
-
-            # Get text from <td> with class="calendar__cell calendar__time time"
-            event_time = td.find("td", {"class": "calendar__cell calendar__time time"}).text
-
-            # Get text from <span> with class="calendar__event-title"
-            event_name = td.find("span", {"class": "calendar__event-title"}).text
+            # Get currency
+            market = td.find('td', {'class' : 'calendar__cell calendar__currency currency'})
 
             # Print the variables
-            print("Event Date:", event_date)
-            print("Event Time:", event_time)
-            print("Event Name:", event_name)
+            print("Market:", market)
 
 
 
