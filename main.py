@@ -38,11 +38,11 @@ try:
     currencies = calendar_table.find_all("td", {'class' : 'calendar__cell calendar__currency currency'})
 
     # Find all times
-    event_time = calendar_table.find_all("td", {'class' : 'calendar__cell calendar__time time'}).div
+    event_time = calendar_table.find_all("td", {'class' : 'calendar__cell calendar__time time'})
 
    # Loop over all td tags with the specified class
     for i, td in enumerate(event_time):
-        symbols[f"event_time_{i+1}"] = td.text.strip()
+        symbols[f"event_time_{i+1}"] = td
 
 
     # Loop over all td tags with the specified class
