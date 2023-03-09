@@ -46,7 +46,7 @@ try:
 
         # get dates
         dates = entry.find_all("td", {"class" : "calendar__cell calendar__date date"})
-        entry_data["date"] = [', '.join([s.text.strip() for s in d.find_all("span")][1:]) for d in dates]
+        entry_data["date"] = ["".join([s.text.strip() for s in d.find_all("span")][1:]) for d in dates]
 
 
 
