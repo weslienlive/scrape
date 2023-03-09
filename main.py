@@ -38,13 +38,14 @@ try:
     event_time = calendar_table.find_all("td", {'class' : 'calendar__cell calendar__time time'})
 
     for i, td in enumerate(event_time):
-    schedule = td.find('div')
-    symbols[f"event_time_{i+1}"] = schedule.text.strip()
+        schedule = td.find('div')
+        symbols[f"event_time_{i+1}"] = schedule.text.strip()
 
-    # Check if the currency is USD
-    currency_td = td.find_next_sibling("td", {'class': 'calendar__currency currency'})
-    if currency_td.text.strip() == "USD":
-        symbols[f"symbol_{i+1}"] = currency_td.text.strip()
+        # Check if the currency is USD
+        currency_td = td.find_next_sibling("td", {'class': 'calendar__currency currency'})
+        
+        if currency_td.text.strip() == "USD":
+            symbols[f"symbol_{i+1}"] = currency_td.text.strip()
 
 
 
