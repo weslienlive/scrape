@@ -78,9 +78,7 @@ print("Event Time:", event_time)
 print("Event Name:", event_name)
 
     
-'''
 
-'''
         # get event date
         event_date = tr.find('td', {'class': 'calendar__cell calendar__date date'}).find('span', {'class': 'date'})
 
@@ -98,11 +96,9 @@ print("Event Name:", event_name)
 
         # print results
         print(event_date, event_time, event_currency, event_impact, event_title)
-'''
 
 
 
-'''
     # Wait for the tbody tag to appear on the webpage
     tbody_locator = (By.TAG_NAME, 'tbody')
     WebDriverWait(driver, 5).until(EC.presence_of_element_located(tbody_locator))
@@ -134,11 +130,7 @@ print("Event Name:", event_name)
     # Print the symbols dictionary
     print(symbols)
 
-'''
 
-
-
-'''
 working v2
 # Loop over all td tags with the specified class
 for i, td in enumerate(event_time):
@@ -150,10 +142,7 @@ for i, td in enumerate(event_time):
     if currency_td.text.strip() == "USD":
         symbols[f"symbol_{i+1}"] = currency_td.text.strip()
 
-'''
 
-
-'''
 good idea
     # Find all table rows
     table_rows = calendar_table.find_all('tr')
@@ -175,4 +164,4 @@ good idea
 
     # Print the symbols dictionary
     print(symbols)
-''''
+'''
