@@ -21,9 +21,6 @@ driver.get(url)
 
 
 try:
-    # Create an empty dictionary to store the currency symbols
-    symbols = {}
-
     # Wait for the tbody tag to appear on the webpage
     tbody_locator = (By.TAG_NAME, 'tbody')
     WebDriverWait(driver, 10).until(EC.presence_of_element_located(tbody_locator))
@@ -36,13 +33,13 @@ try:
 
     # Find all entries
     entries = calendar_table.find_all('tr')
-    print(entries)
 
     # Loop over entries and print their index number and contents
     events_schedule = {}
     for i, entry in enumerate(entries):
         events_schedule[f"entry_{i+1}"] = entry
         
+    print(events_schedule)
 
 except Exception as e:
     print(f"Error: {e}")
