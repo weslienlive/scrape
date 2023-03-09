@@ -34,24 +34,19 @@ try:
     # Find the table with class "calendar__table"
     calendar_table = soup.find('table', {'class': 'calendar__table'})
 
-    # Find all table rows
-    table_rows = calendar_table.find_all('tr')
+    # Find all times
+    event_time = calendar_table.find_all("td", {'class' : 'calendar__cell calendar__time time'})
 
-    # Loop over all table rows
-    symbols = {}
-    for i, tr in enumerate(table_rows):
-        # Find the currency and event time for this row
-        currency = tr.find("td", {'class': 'calendar__cell calendar__currency currency'}).text.strip()
-        event_time = tr.find("td", {'class': 'calendar__cell calendar__time time'}).find('div').text.strip()
+    for i, td in enumerate(event_time):
+    schedule = td.find('div')
+    symbols[f"event_time_{i+1}"] = schedule.text.strip()
 
-        # Store the currency and event time in a dictionary
-        entry = {"symbol": currency, "event_time": event_time}
+    # Check if the currency is USD
+    currency_td = td.find_next_sibling("td", {'class': 'calendar__currency currency'})
+    if currency_td.text.strip() == "USD":
+        symbols[f"symbol_{i+1}"] = currency_td.text.strip()
 
-        # Store the dictionary under the entry number in the symbols dictionary
-        symbols[f"entry_number_{i+1}"] = entry
 
-    # Print the symbols dictionary
-    print(symbols)
 
 
 except Exception as e:
@@ -140,3 +135,44 @@ print("Event Name:", event_name)
     print(symbols)
 
 '''
+
+
+
+'''
+working v2
+# Loop over all td tags with the specified class
+for i, td in enumerate(event_time):
+    schedule = td.find('div')
+    symbols[f"event_time_{i+1}"] = schedule.text.strip()
+
+    # Check if the currency is USD
+    currency_td = td.find_next_sibling("td", {'class': 'calendar__currency currency'})
+    if currency_td.text.strip() == "USD":
+        symbols[f"symbol_{i+1}"] = currency_td.text.strip()
+
+'''
+
+
+'''
+good idea
+    # Find all table rows
+    table_rows = calendar_table.find_all('tr')
+
+    # Loop over all table rows
+    symbols = {}
+    for i, tr in enumerate(table_rows):
+        entry = {}
+        
+        # Insert loop here
+        # Find the currency and event time for this row
+        currency = tr.find("td", {'class' : 'calendar__cell calendar__currency currency'})
+        event_time = tr.find_all("td", {'class' : 'calendar__cell calendar__time time'})
+
+
+
+        # Store the dictionary under the entry number in the symbols dictionary
+        symbols[f"entry_number_{i+1}"] = entry
+
+    # Print the symbols dictionary
+    print(symbols)
+''''
