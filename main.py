@@ -36,23 +36,8 @@ try:
 
     # Loop over all tr tags in the table
     for tr in tr_tags:
-        # get event date
-        event_date = tr.find('td', {'class': 'calendar__cell calendar__date date'}).find('span', {'class': 'date'})
+        print(tr.find_all('td'))
 
-        # get event time
-        event_time = tr.find('td', {'class': 'calendar__cell calendar__time time'})
-
-        # get event currency
-        event_currency = tr.find('td', {'class': 'calendar__cell calendar__currency currency'})
-
-        # get event impact
-        event_impact = tr.find('td', {'class': 'calendar__cell calendar__impact impact calendar__impact calendar__impact--high'}).span['title']
-
-        # get event title
-        event_title = tr.find('span', {'class': 'calendar__event-title'})
-
-        # print results
-        print(event_date, event_time, event_currency, event_impact, event_title)
 
 
 except Exception as e:
@@ -84,4 +69,24 @@ print("Event Time:", event_time)
 print("Event Name:", event_name)
 
     
+'''
+
+'''
+        # get event date
+        event_date = tr.find('td', {'class': 'calendar__cell calendar__date date'}).find('span', {'class': 'date'})
+
+        # get event time
+        event_time = tr.find('td', {'class': 'calendar__cell calendar__time time'})
+
+        # get event currency
+        event_currency = tr.find('td', {'class': 'calendar__cell calendar__currency currency'})
+
+        # get event impact
+        event_impact = tr.find('td', {'class': 'calendar__cell calendar__impact impact calendar__impact calendar__impact--high'}).span['title']
+
+        # get event title
+        event_title = tr.find('span', {'class': 'calendar__event-title'})
+
+        # print results
+        print(event_date, event_time, event_currency, event_impact, event_title)
 '''
