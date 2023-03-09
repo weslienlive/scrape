@@ -55,7 +55,7 @@ try:
         # get name
         name_td = entry.find_all("td", {"class": "calendar__cell calendar__event event"})
         name_span = name_td.find("span", {"class": "calendar__event-title"})
-        entry_data["name"] = name_span.text.strip()      
+        entry_data["name"] = name_span.text.strip()      # comment
 
 
 
