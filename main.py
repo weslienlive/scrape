@@ -21,6 +21,9 @@ driver.get(url)
 
 
 try:
+    # Create an empty dictionary to store the currency symbols
+    symbols = {}
+
     # Wait for the tbody tag to appear on the webpage
     tbody_locator = (By.TAG_NAME, 'tbody')
     WebDriverWait(driver, 5).until(EC.presence_of_element_located(tbody_locator))
@@ -31,11 +34,16 @@ try:
     # Find the table with class "calendar__table"
     calendar_table = soup.find('table', {'class': 'calendar__table'})
 
-    # Find all <td> tags with the specified class using BeautifulSoup's "find_all" method
+    # Find all currencies
     currencies = calendar_table.find_all("td", {'class' : 'calendar__cell calendar__currency currency'})
 
-    # Create an empty dictionary to store the currency symbols
-    symbols = {}
+    # Find all times
+    event_time = calendar_table.find_all("td", {'class' : 'calendar__cell calendar__time time'}).div
+
+`   # Loop over all td tags with the specified class
+    for i, td in enumerate(event_time):
+            symbols[f"event_time_{i+1}"] = td.text.strip()
+
 
     # Loop over all td tags with the specified class
     for i, td in enumerate(currencies):
