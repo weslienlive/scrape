@@ -37,7 +37,7 @@ try:
     # Loop over all tr tags in the table
     for tr in tr_tags:
         # get event date
-        event_date = tr.find('td', 'class' : 'calendar__cell calendar__date date').find('span', {'class': 'date'})
+        event_date = tr.find('td', {'class': 'calendar__cell calendar__date date'}).find('span', {'class': 'date'})
 
         # get event time
         event_time = tr.find('td', {'class': 'calendar__cell calendar__time time'})
