@@ -32,7 +32,8 @@ try:
     calendar_table = soup.find('table', {'class': 'calendar__table'})
 
     # Find all entries
-    entries = calendar_table.find_all('tr', {'class' : 'calendar__row calendar_row calendar__row--grey calendar__row--new-day newday'})
+    entries = calendar_table.find_all('tr', {'class' : 'calendar__row'})
+    print(len(entries))
 
     # Loop over entries and print their index number and contents
     events_schedule = {}
@@ -42,8 +43,6 @@ try:
         # get currencies
         currencies = entry.find_all("td", {'class' : 'calendar__cell calendar__currency currency'})
         entry_data["currency"] = ', '.join([c.text.strip() for c in currencies])
-
-
 
         # Update events schedule
         events_schedule[f"entry_{i+1}"] = entry_data
