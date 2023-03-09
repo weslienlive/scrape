@@ -38,11 +38,7 @@ try:
     for tr in tr_tags:
         td_tags = tr.find_all('td')
         for td in td_tags:
-            # Get currency
-            market = td.find('td', class_='calendar__cell calendar__currency currency').text
-
-            # Print the variables
-            print("Market:", market)
+            print(td)
 
 
 
