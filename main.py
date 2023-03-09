@@ -53,9 +53,10 @@ try:
         entry_data["time"] = ', '.join([t.text.strip() for t in time])
 
         # get name
-        name_td = entry.find_all("td", {"class": "calendar__cell calendar__event event"})
-        name_span = name_td.find("span", {"class": "calendar__event-title"})
-        entry_data["name"] = name_span.text.strip()      # comment
+        name_span = [td.find("span", {"class": "calendar__event-title"}) for td in entry.find_all("td", {"class": "calendar__cell calendar__event event"})]
+        print(name_span)
+        #entry_data["name"] = [span.text.strip() for span in name_span]
+
 
 
 
