@@ -37,8 +37,12 @@ try:
     # Loop over entries and print their index number and contents
     events_schedule = {}
     for i, entry in enumerate(entries):
+        entries = { "currency" : None, "date" : None, "time" : None, "name" : None, "impact" : None}
+
         currencies = entry.find_all("td", {'class' : 'calendar__cell calendar__currency currency'})
-        events_schedule[f"entry_{i+1}"] = entry
+        entries["currency"] = currencies
+
+        events_schedule[f"entry_{i+1}"] = entries
         
     print(events_schedule)
 
