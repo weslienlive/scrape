@@ -26,7 +26,7 @@ try:
 
     # Wait for the tbody tag to appear on the webpage
     tbody_locator = (By.TAG_NAME, 'tbody')
-    WebDriverWait(driver, 5).until(EC.presence_of_element_located(tbody_locator))
+    WebDriverWait(driver, 10).until(EC.presence_of_element_located(tbody_locator))
 
     # Get the page source and parse it with BeautifulSoup
     soup = BeautifulSoup(driver.page_source, 'html.parser')
@@ -34,27 +34,24 @@ try:
     # Find the table with class "calendar__table"
     calendar_table = soup.find('table', {'class': 'calendar__table'})
 
-    # Find all currencies
-    currencies = calendar_table.find_all("td", {'class' : 'calendar__cell calendar__currency currency'})
+    # Find all table rows
+    table_rows = calendar_table.find_all('tr')
 
-    # Find all times
-    event_time = calendar_table.find_all("td", {'class' : 'calendar__cell calendar__time time'})
+    # Loop over all table rows
+    symbols = {}
+    for i, tr in enumerate(table_rows):
+        # Find the currency and event time for this row
+        currency = tr.find("td", {'class': 'calendar__cell calendar__currency currency'}).text.strip()
+        event_time = tr.find("td", {'class': 'calendar__cell calendar__time time'}).find('div').text.strip()
 
-    # Loop over all td tags with the specified class
-    for i, td in enumerate(event_time):
-        schedule = td.find('div')
-        symbols[f"event_time_{i+1}"] = schedule.text.strip()
+        # Store the currency and event time in a dictionary
+        entry = {"symbol": currency, "event_time": event_time}
 
-
-    # Loop over all td tags with the specified class
-    for i, td in enumerate(currencies):
-        if td.text.strip() == "USD":
-            symbols[f"symbol_{i+1}"] = td.text.strip()
+        # Store the dictionary under the entry number in the symbols dictionary
+        symbols[f"entry_number_{i+1}"] = entry
 
     # Print the symbols dictionary
     print(symbols)
-
-
 
 
 except Exception as e:
@@ -106,4 +103,40 @@ print("Event Name:", event_name)
 
         # print results
         print(event_date, event_time, event_currency, event_impact, event_title)
+'''
+
+
+
+'''
+    # Wait for the tbody tag to appear on the webpage
+    tbody_locator = (By.TAG_NAME, 'tbody')
+    WebDriverWait(driver, 5).until(EC.presence_of_element_located(tbody_locator))
+
+    # Get the page source and parse it with BeautifulSoup
+    soup = BeautifulSoup(driver.page_source, 'html.parser')
+
+    # Find the table with class "calendar__table"
+    calendar_table = soup.find('table', {'class': 'calendar__table'})
+
+
+    # Find all currencies
+    currencies = calendar_table.find_all("td", {'class' : 'calendar__cell calendar__currency currency'})
+
+    # Find all times
+    event_time = calendar_table.find_all("td", {'class' : 'calendar__cell calendar__time time'})
+
+    # Loop over all td tags with the specified class
+    for i, td in enumerate(event_time):
+        schedule = td.find('div')
+        symbols[f"event_time_{i+1}"] = schedule.text.strip()
+
+
+    # Loop over all td tags with the specified class
+    for i, td in enumerate(currencies):
+        if td.text.strip() == "USD":
+            symbols[f"symbol_{i+1}"] = td.text.strip()
+
+    # Print the symbols dictionary
+    print(symbols)
+
 '''
