@@ -46,7 +46,7 @@ try:
     # Loop over all td tags with the specified class
     for i, td in enumerate(event_time):
         dates = td.find('span', {'class' : 'date'})
-        symbols[f"event_date_{i+1}"] = dates
+        symbols[f"event_date_{i+1}"] = td
 
 
     # Loop over all td tags with the specified class
