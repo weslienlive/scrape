@@ -34,21 +34,34 @@ try:
     # Find the table with class "calendar__table"
     calendar_table = soup.find('table', {'class': 'calendar__table'})
 
+    # Find all currencies
+    currencies = calendar_table.find_all("td", {'class' : 'calendar__cell calendar__currency currency'})
+
     # Find all times
     event_time = calendar_table.find_all("td", {'class' : 'calendar__cell calendar__time time'})
 
+    # Find all dates
+    event_date = calendar_table.find_all('td', {'class' : 'calendar__cell calendar__date date'})
+
+    # Loop over all td tags with the specified class
+    for i, td in enumerate(event_time):
+        dates = td.find('span', {'class' : 'date'})
+        symbols[f"event_date_{i+1}"] = dates
+
+
+    # Loop over all td tags with the specified class
     for i, td in enumerate(event_time):
         schedule = td.find('div')
         symbols[f"event_time_{i+1}"] = schedule.text.strip()
 
-        # Check if the currency is USD
-        currency_td = td.find_next_sibling("td", {'class': 'calendar__currency currency'})
-        
-        if currency_td.text.strip() == "USD":
-            symbols[f"symbol_{i+1}"] = currency_td.text.strip()
 
+    # Loop over all td tags with the specified class
+    for i, td in enumerate(currencies):
+        if td.text.strip() == "USD":
+            symbols[f"symbol_{i+1}"] = td.text.strip()
 
-
+    # Print the symbols dictionary
+    print(symbols)
 
 except Exception as e:
     print(f"Error: {e}")
