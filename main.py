@@ -36,22 +36,23 @@ try:
 
     # Loop over all tr tags in the table
     for tr in tr_tags:
-        # Find the td tags within the tr tag
-        td_tags = tr.find_all('td')
-        
-        # Extract the event date from the first td tag
-        event_date = td_tags[0].text.strip()
-        
-        # Extract the event time from the second td tag
-        event_time = td_tags[1].text.strip()
-        
-        # Extract the event name from the fifth td tag
-        event_name = td_tags[4].text.strip()
-        
-        # Print the extracted information
-        print('Event date:', event_date)
-        print('Event time:', event_time)
-        print('Event name:', event_name)
+        # get event date
+        event_date = tr.find('span', {'class': 'date'}).text.strip()
+
+        # get event time
+        event_time = tr.find('td', {'class': 'calendar__cell calendar__time time'}).div.text.strip()
+
+        # get event currency
+        event_currency = tr.find('td', {'class': 'calendar__cell calendar__currency currency'}).text.strip()
+
+        # get event impact
+        event_impact = tr.find('td', {'class': 'calendar__cell calendar__impact impact calendar__impact calendar__impact--high'}).span['title']
+
+        # get event title
+        event_title = tr.find('span', {'class': 'calendar__event-title'}).text.strip()
+
+        # print results
+        print(event_date, event_time, event_currency, event_impact, event_title)
 
 
 except Exception as e:
