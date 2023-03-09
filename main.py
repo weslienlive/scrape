@@ -40,16 +40,16 @@ try:
         event_date = tr.find('span', {'class': 'date'})
 
         # get event time
-        event_time = tr.find('td', {'class': 'calendar__cell calendar__time time'}).div.text
+        event_time = tr.find('td', {'class': 'calendar__cell calendar__time time'})
 
         # get event currency
-        event_currency = tr.find('td', {'class': 'calendar__cell calendar__currency currency'}).text
+        event_currency = tr.find('td', {'class': 'calendar__cell calendar__currency currency'})
 
         # get event impact
         event_impact = tr.find('td', {'class': 'calendar__cell calendar__impact impact calendar__impact calendar__impact--high'}).span['title']
 
         # get event title
-        event_title = tr.find('span', {'class': 'calendar__event-title'}).text
+        event_title = tr.find('span', {'class': 'calendar__event-title'})
 
         # print results
         print(event_date, event_time, event_currency, event_impact, event_title)
