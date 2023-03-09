@@ -31,14 +31,12 @@ try:
     # Find the table with class "calendar__table"
     calendar_table = soup.find('table', {'class': 'calendar__table'})
 
-    # Find all <tr> tags with the specified class using BeautifulSoup's "find_all" method
-    tr_tags = calendar_table.find_all("tr", {'class' : 'calendar__row calendar_row calendar__row--grey calendar__row--alt alt'})
+    # Find all <td> tags with the specified class using BeautifulSoup's "find_all" method
+    td_tags = calendar_table.find_all("td", {'class' : 'calendar__cell calendar__currency currency'})
 
-    # Loop over all tr tags in the table
-    for tr in tr_tags:
-        td_tags = tr.find_all('td')
-        for td in td_tags:
-            print(td)
+    # Loop over all td tags with the specified class
+    for td in td_tags:
+        print(td.text.strip())
 
 
 
